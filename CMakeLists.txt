@@ -10,10 +10,19 @@ find_package(OpenGL REQUIRED)
 find_package(glfw3 3.3 QUIET)
 find_package(glm QUIET)
 
-add_executable(ChronoDash
+set(SOURCES
     main.cpp
     src/gl.c
+    src/Shader.cpp
+    src/Mesh.cpp
+    src/UIRenderer.cpp
+    src/Player.cpp
+    src/GameState.cpp
+    src/GameWorld.cpp
+    src/Renderer.cpp
 )
+
+add_executable(ChronoDash ${SOURCES})
 
 target_include_directories(ChronoDash PRIVATE include)
 

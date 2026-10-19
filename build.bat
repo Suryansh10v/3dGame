@@ -15,7 +15,7 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 echo [INFO] Building directly with g++...
-g++ -std=c++17 -O2 -Iinclude main.cpp src\gl.c -lglfw3 -lopengl32 -lgdi32 -o ChronoDash.exe
+g++ -std=c++17 -O2 -Iinclude main.cpp src\gl.c src\Shader.cpp src\Mesh.cpp src\UIRenderer.cpp src\Player.cpp src\GameState.cpp src\GameWorld.cpp src\Renderer.cpp -lglfw3 -lopengl32 -lgdi32 -o ChronoDash.exe
 if %ERRORLEVEL% EQU 0 (
     echo [SUCCESS] ChronoDash.exe built successfully!
 ) else (
