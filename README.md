@@ -73,7 +73,7 @@ run.bat
 
 ### Option 2: Direct Compiler Command
 ```bash
-g++ -std=c++17 -O2 -Iinclude main.cpp src/gl.c -lglfw3 -lopengl32 -lgdi32 -o ChronoDash.exe
+g++ -std=c++17 -O2 -Iinclude main.cpp src/gl.c src/Shader.cpp src/Mesh.cpp src/UIRenderer.cpp src/Player.cpp src/GameState.cpp src/GameWorld.cpp src/Renderer.cpp -lglfw3 -lopengl32 -lgdi32 -o ChronoDash.exe
 ./ChronoDash.exe
 ```
 
@@ -82,4 +82,38 @@ g++ -std=c++17 -O2 -Iinclude main.cpp src/gl.c -lglfw3 -lopengl32 -lgdi32 -o Chr
 cmake -B build -S .
 cmake --build build --config Release
 ./build/ChronoDash.exe
+```
+
+---
+
+## 📂 Project Structure
+
+```
+CgGameCie3/
+├── CMakeLists.txt            # CMake configuration with modular source targets
+├── build.bat                 # One-click Windows build script (CMake / direct g++)
+├── run.bat                   # One-click launcher for ChronoDash.exe
+├── include/
+│   ├── OpenGLHeaders.h       # Unified GLAD & GLFW cross-loader inclusion
+│   ├── Constants.h           # Arena center, core radius, window presets
+│   ├── Types.h               # Vertex3D, UIVertex, AABB, Platform, Projectile, Particle, Enemy
+│   ├── Shader.h              # ShaderProgram wrapper class and GLSL declarations
+│   ├── Mesh.h                # Mesh3D class and procedural geometry generators
+│   ├── UIRenderer.h          # 2D HUD vector stroke typography & quad renderer
+│   ├── Player.h              # Player FPS camera, movement physics, weapon dynamics
+│   ├── GameState.h           # Score tracking, hit streak multipliers, countdown timers
+│   ├── GameWorld.h           # Arena entity management, physics loop, AI behavior, firing
+│   ├── Renderer.h            # 3-Pass graphics rendering pipeline (World, Gun, HUD)
+│   ├── glad/                 # GLAD 2.0.8 OpenGL 3.3 Core headers
+│   └── KHR/                  # Khronos platform headers
+├── src/
+│   ├── gl.c                  # GLAD OpenGL symbol loader implementation
+│   ├── Shader.cpp            # Shader compilation, linking, and embedded GLSL sources
+│   ├── Mesh.cpp              # Vertex arrays / buffers and procedural mesh algorithms
+│   ├── UIRenderer.cpp        # Vector font glyph strokes, string rasterizer, HUD geometry
+│   ├── Player.cpp            # Camera vectors, AABB bounds, reload logic
+│   ├── GameState.cpp         # Hit processing, streak multipliers, countdown, reset
+│   ├── GameWorld.cpp         # Arena generation, antigravity physics, AI steering, collisions
+│   ├── Renderer.cpp          # Pass 1 (World), Pass 2 (Viewmodel Gun), Pass 3 (2D HUD)
+│   └── main.cpp              # Application entry point, GLFW window, input callbacks, loop
 ```
